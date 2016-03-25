@@ -136,6 +136,8 @@
 */
     if (key >= 96 && key <= 105) {
         jsCalculator.handleNumber(key - 96)
+    } else if  (key >= 48 && key <= 57) {
+        jsCalculator.handleNumber(key - 48)
     } else if (key === 107) {
         jsCalculator.handleOperator('+');
     } else if (key === 109) {
