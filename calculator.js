@@ -121,41 +121,48 @@
     }
 
 /*
-  Method to use the keypad numbers and operators.
-*/
-    window.onkeyup = function(e) {
-    e.preventDefault();
-    var key = e.keyCode ? e.keyCode : e.which;
-
-/*
+  Method to use the keyboard numbers and operators (using onkeypress).
   If the key is a number it will run the handleNumber method.
   If the key is a operator it will run the handleOperator method.
   If the key is backspace it will run the clearEntry method.
+*/
+  window.onkeypress = function(e) {
+    e.preventDefault();
+    var key = e.keyCode ? e.keyCode : e.which;
+
+if (key >= 96 && key <= 105) {
+    jsCalculator.handleNumber(key - 96);
+} else if  (key >= 48 && key <= 57) {
+    jsCalculator.handleNumber(key - 48);
+} else if (key === 43) {
+    jsCalculator.handleOperator('+');
+} else if (key === 45) {
+    jsCalculator.handleOperator('-');
+} else if (key === 37) {
+    jsCalculator.handleOperator('%');
+} else if (key === 42) {
+    jsCalculator.handleOperator('*');
+} else if (key === 47) {
+    jsCalculator.handleOperator('/');
+} else if (key === 46) {
+    jsCalculator.handleOperator('.');
+} else if (key === 13) {
+    jsCalculator.getTotal();
+}
+
+/*
+  Method to use the keyboard backspace and delete (using onkeyup).
   If the key is delete it will run the allClear method.
   If the key is enter it will run the getTotal method.
 */
-    if (key >= 96 && key <= 105) {
-        jsCalculator.handleNumber(key - 96)
-    } else if  (key >= 48 && key <= 57) {
-        jsCalculator.handleNumber(key - 48)
-    } else if (key === 107) {
-        jsCalculator.handleOperator('+');
-    } else if (key === 109) {
-        jsCalculator.handleOperator('-');
-    } else if (key === 53) {
-        jsCalculator.handleOperator('%');
-    } else if (key === 106) {
-        jsCalculator.handleOperator('*');
-    } else if (key === 111) {
-        jsCalculator.handleOperator('/');
-    } else if (key === 110) {
-        jsCalculator.handleOperator('.');
-    } else if (key === 8) {
-        jsCalculator.clearEntry();
-    } else if (key === 46) {
-        jsCalculator.allClear();
-    } else if (key === 13) {
-        jsCalculator.getTotal();
-    }
+  window.onkeyup = function(e) {
+    e.preventDefault();
+    var key = e.keyCode ? e.keyCode : e.which;
+
+ if (key === 8) {
+    jsCalculator.clearEntry();
+} else if (key === 46) {
+    jsCalculator.allClear();
 }
-})();
+}
+}})();
